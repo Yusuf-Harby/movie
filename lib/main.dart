@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movie/core/utils/app_theme.dart';
 import 'package:movie/feature/app_section/app_section.dart';
+import 'package:movie/feature/home/view/screens/details_screen.dart';
 
 void main() {
   runApp(const Movie());
@@ -15,7 +16,10 @@ class Movie extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: AppTheme.darkTheme,
       initialRoute: App.routeName,
-      routes: {App.routeName: (_) => const App()},
+      routes: {
+        App.routeName: (_) => const App(),
+        DetailsScreen.routeName: (_) => const DetailsScreen(),
+      },
     );
   }
 }
