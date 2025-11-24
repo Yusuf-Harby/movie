@@ -13,7 +13,7 @@ class Movie extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: AppTheme.showDarkTheme(),
+      theme: AppTheme.darkTheme,
       initialRoute: App.routeName,
       routes: {App.routeName: (_) => const App()},
     );
