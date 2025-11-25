@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie/core/constants/app_strings.dart';
+import 'package:movie/core/constants/textstylys.dart';
 import 'package:movie/core/dialogs/app_toasts.dart';
 import 'package:movie/feature/home/cubit/realse_movie_cubit/release_movie_cubit.dart';
 import 'package:movie/feature/home/cubit/recommended_movie_cubit/recommended_movie_cubit.dart';
@@ -34,91 +35,98 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(title: const Text(AppStrings.home)),
 
       body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text("Realise movies", textAlign: TextAlign.center),
-            Divider(),
-            BlocBuilder<ReleaseMovieCubit, ReleaseMovieState>(
-              bloc: releaseCubit,
-              builder: (context, state) {
-                if (state is ReleaseMovieSuccess) {
-                  return SizedBox(
-                    height: MediaQuery.of(context).size.height / 6,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      shrinkWrap: true,
-                      itemBuilder: (context, index) {
-                        return ItemMovieWidget(
-                          posterPath: state.resultList?[index].posterPath ?? "",
-                          onTap: () {
-                            int id = state.resultList?[index].id ?? 0;
-                            Navigator.pushNamed(
-                              context,
-                              DetailsScreen.routeName,
-                              arguments: id,
-                            );
-                          },
-                        );
-                      },
-                      itemCount: state.resultList?.length ?? 0,
-                    ),
-                  );
-                } else if (state is ReleaseMovieError) {
-                  AppToast.showToast(
-                    context: context,
-                    title: "Error",
-                    description: state.message,
-                    type: ToastificationType.error,
-                  );
-                  return Text(state.message);
-                } else {
-                  return Center(child: CircularProgressIndicator());
-                }
-              },
-            ),
+        child: Padding(
+          padding: const EdgeInsets.only(left: 20, right: 24),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text("Realise movies", style: Textstylys.titleStyle),
+              SizedBox(height: 10),
 
-            Text("Recomnded movies", textAlign: TextAlign.center),
-            Divider(),
-            BlocBuilder<RecommendedMovieCubit, RecommendedMovieState>(
-              bloc: recommndedCubit,
-              builder: (context, state) {
-                if (state is RecommendedSuccess) {
-                  return SizedBox(
-                    height: MediaQuery.of(context).size.height / 6,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      shrinkWrap: true,
-                      itemBuilder: (context, index) {
-                        return ItemMovieWidget(
-                          posterPath: state.resultList?[index].posterPath ?? "",
-                          onTap: () {
-                            int id = state.resultList?[index].id ?? 0;
-                            Navigator.pushNamed(
-                              context,
-                              DetailsScreen.routeName,
-                              arguments: id,
-                            );
-                          },
-                        );
-                      },
-                      itemCount: state.resultList?.length ?? 0,
-                    ),
-                  );
-                } else if (state is RecommendedMovieError) {
-                  AppToast.showToast(
-                    context: context,
-                    title: "Error",
-                    description: state.message,
-                    type: ToastificationType.error,
-                  );
-                  return Text(state.message);
-                } else {
-                  return Center(child: CircularProgressIndicator());
-                }
-              },
-            ),
-          ],
+              BlocBuilder<ReleaseMovieCubit, ReleaseMovieState>(
+                bloc: releaseCubit,
+                builder: (context, state) {
+                  if (state is ReleaseMovieSuccess) {
+                    return SizedBox(
+                      height: MediaQuery.of(context).size.height / 6,
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) {
+                          return ItemMovieWidget(
+                            posterPath:
+                                state.resultList?[index].posterPath ?? "",
+                            onTap: () {
+                              int id = state.resultList?[index].id ?? 0;
+                              Navigator.pushNamed(
+                                context,
+                                DetailsScreen.routeName,
+                                arguments: id,
+                              );
+                            },
+                          );
+                        },
+                        itemCount: state.resultList?.length ?? 0,
+                      ),
+                    );
+                  } else if (state is ReleaseMovieError) {
+                    AppToast.showToast(
+                      context: context,
+                      title: "Error",
+                      description: state.message,
+                      type: ToastificationType.error,
+                    );
+                    return Text(state.message);
+                  } else {
+                    return Center(child: CircularProgressIndicator());
+                  }
+                },
+              ),
+              SizedBox(height: 20),
+              Text("Recomnded movies", style: Textstylys.titleStyle),
+              SizedBox(height: 10),
+
+              BlocBuilder<RecommendedMovieCubit, RecommendedMovieState>(
+                bloc: recommndedCubit,
+                builder: (context, state) {
+                  if (state is RecommendedSuccess) {
+                    return SizedBox(
+                      height: MediaQuery.of(context).size.height / 6,
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) {
+                          return ItemMovieWidget(
+                            posterPath:
+                                state.resultList?[index].posterPath ?? "",
+                            onTap: () {
+                              int id = state.resultList?[index].id ?? 0;
+                              Navigator.pushNamed(
+                                context,
+                                DetailsScreen.routeName,
+                                arguments: id,
+                              );
+                            },
+                          );
+                        },
+                        itemCount: state.resultList?.length ?? 0,
+                      ),
+                    );
+                  } else if (state is RecommendedMovieError) {
+                    AppToast.showToast(
+                      context: context,
+                      title: "Error",
+                      description: state.message,
+                      type: ToastificationType.error,
+                    );
+                    return Text(state.message);
+                  } else {
+                    return Center(child: CircularProgressIndicator());
+                  }
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );
