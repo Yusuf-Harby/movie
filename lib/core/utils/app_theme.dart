@@ -115,15 +115,14 @@ abstract class AppTheme {
       ),
       labelLarge: TextStyle(
         color: AppColors.white,
-        fontSize: 14,
-        fontWeight: FontWeight.w500,
+        fontSize: 18,
+        fontWeight: FontWeight.bold,
         fontFamily: AppStrings.fontPoppins,
-        height: 1.4,
       ),
       labelMedium: TextStyle(
-        color: AppColors.gray,
-        fontSize: 12,
-        fontWeight: FontWeight.w500,
+        color: AppColors.white,
+        fontSize: 14,
+        fontWeight: FontWeight.w400,
         fontFamily: AppStrings.fontPoppins,
         height: 1.4,
       ),
@@ -132,7 +131,6 @@ abstract class AppTheme {
         fontSize: 10,
         fontWeight: FontWeight.w500,
         fontFamily: AppStrings.fontPoppins,
-        height: 1.3,
       ),
     ),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(

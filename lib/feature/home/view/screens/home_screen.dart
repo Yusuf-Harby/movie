@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie/core/constants/app_strings.dart';
-import 'package:movie/core/constants/textstylys.dart';
 import 'package:movie/core/dialogs/app_toasts.dart';
+import 'package:movie/core/dialogs/loading_skeletonizer.dart';
 import 'package:movie/feature/home/cubit/realse_movie_cubit/release_movie_cubit.dart';
 import 'package:movie/feature/home/cubit/recommended_movie_cubit/recommended_movie_cubit.dart';
 import 'package:movie/feature/home/view/screens/details_screen.dart';
@@ -40,7 +40,10 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("Realise movies", style: Textstylys.titleStyle),
+              Text(
+                "Realise movies",
+                style: Theme.of(context).textTheme.labelMedium,
+              ),
               SizedBox(height: 10),
 
               BlocBuilder<ReleaseMovieCubit, ReleaseMovieState>(
@@ -78,12 +81,15 @@ class _HomeScreenState extends State<HomeScreen> {
                     );
                     return Text(state.message);
                   } else {
-                    return Center(child: CircularProgressIndicator());
+                    return LoadingWidgetSkelton();
                   }
                 },
               ),
               SizedBox(height: 20),
-              Text("Recomnded movies", style: Textstylys.titleStyle),
+              Text(
+                "Recomnded movies",
+                style: Theme.of(context).textTheme.labelMedium,
+              ),
               SizedBox(height: 10),
 
               BlocBuilder<RecommendedMovieCubit, RecommendedMovieState>(
@@ -121,7 +127,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     );
                     return Text(state.message);
                   } else {
-                    return Center(child: CircularProgressIndicator());
+                    return LoadingWidgetSkelton();
                   }
                 },
               ),

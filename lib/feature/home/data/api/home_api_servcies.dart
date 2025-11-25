@@ -6,13 +6,9 @@ import 'package:http/http.dart' as http;
 import 'package:movie/feature/home/data/model/reccomended_movie_model.dart';
 import 'package:movie/feature/home/data/model/releases_movie_model.dart';
 
-abstract class RecomendedRealiseApi {
+abstract class HomeApiServcies {
   static final String _releaseEndPoint = "/3/movie/upcoming";
   static final String _recommendedEndPoint = "/3/movie/top_rated";
-
-  Uri url = Uri.https(ApiConstants.baseUrl, _releaseEndPoint, {
-    'api_key': ApiConstants.apiKey,
-  });
 
   static Future<ApiResult<ReleasesMovieModel>> getReleasesMovies() async {
     try {

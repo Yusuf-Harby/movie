@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:movie/core/network/api_result.dart';
-import 'package:movie/feature/home/data/api/recomended_realise_api.dart';
+import 'package:movie/feature/home/data/api/home_api_servcies.dart';
 import 'package:movie/feature/home/data/model/releases_movie_model.dart';
 
 part 'release_movie_state.dart';
@@ -10,7 +10,7 @@ class ReleaseMovieCubit extends Cubit<ReleaseMovieState> {
 
   Future<void> getReleasesMovies() async {
     emit(ReleaseMovieLoading());
-    var result = await RecomendedRealiseApi.getReleasesMovies();
+    var result = await HomeApiServcies.getReleasesMovies();
 
     switch (result) {
       case ApiSuccess<ReleasesMovieModel>():

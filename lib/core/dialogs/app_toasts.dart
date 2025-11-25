@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movie/core/constants/app_colors.dart';
 import 'package:toastification/toastification.dart';
 
 abstract class AppToast {
@@ -11,34 +12,31 @@ abstract class AppToast {
     toastification.show(
       context: context,
       type: type,
-      title: Text(
-        title,
-        style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-      ),
+      title: Text(title, style: Theme.of(context).textTheme.labelLarge),
       description: Text(
         description,
-        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+        style: Theme.of(context).textTheme.labelMedium,
       ),
-      primaryColor: Colors.white,
+      primaryColor: AppColors.white,
       autoCloseDuration: const Duration(seconds: 3),
       progressBarTheme: ProgressIndicatorThemeData(
         color: type == ToastificationType.success
-            ? Colors.green
+            ? AppColors.green
             : type == ToastificationType.info
-            ? Colors.blue
+            ? AppColors.blue
             : type == ToastificationType.warning
-            ? Colors.orange
-            : Colors.red,
+            ? AppColors.orange
+            : AppColors.red,
       ),
       showProgressBar: true,
       backgroundColor: type == ToastificationType.success
-          ? Colors.green
+          ? AppColors.green
           : type == ToastificationType.info
-          ? Colors.blue
+          ? AppColors.blue
           : type == ToastificationType.warning
-          ? Colors.orange
-          : Colors.red,
-      foregroundColor: Colors.white,
+          ? AppColors.orange
+          : AppColors.red,
+      foregroundColor: AppColors.white,
     );
   }
 }

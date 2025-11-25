@@ -40,6 +40,8 @@ dependencies:
   http: ^1.6.0
   bloc: ^9.1.0
   flutter_bloc: ^9.1.1
+  skeletonizer: ^2.1.0+1
+  cached_network_image: ^3.4.1
 
 dev_dependencies:
   flutter_test:
