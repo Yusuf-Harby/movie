@@ -66,7 +66,7 @@ abstract class AppTheme {
       ),
       headlineSmall: TextStyle(
         color: AppColors.white,
-        fontSize: 18,
+        fontSize: 12,
         fontWeight: FontWeight.w600,
         fontFamily: AppStrings.fontPoppins,
         height: 1.3,
@@ -166,15 +166,15 @@ abstract class AppTheme {
         fontFamily: AppStrings.fontPoppins,
       ),
       border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(16),
         borderSide: const BorderSide(color: AppColors.gray),
       ),
       enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(16),
         borderSide: const BorderSide(color: AppColors.gray),
       ),
       focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(16),
         borderSide: const BorderSide(color: AppColors.selected),
       ),
     ),
