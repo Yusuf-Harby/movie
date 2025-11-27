@@ -106,11 +106,10 @@ class _HomeScreenState extends State<HomeScreen> {
                             posterPath:
                                 state.resultList?[index].posterPath ?? "",
                             onTap: () {
-                              int id = state.resultList?[index].id ?? 0;
                               Navigator.pushNamed(
                                 context,
                                 DetailsScreen.routeName,
-                                arguments: id,
+                                arguments: state.resultList?[index].id,
                               );
                             },
                           );

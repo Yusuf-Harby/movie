@@ -3,12 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:movie/core/constants/app_strings.dart';
 import 'package:movie/core/dialogs/app_toasts.dart';
-import 'package:movie/core/dialogs/loading_skeletonizer.dart';
+import 'package:movie/feature/home/view/screens/details_screen.dart';
 import 'package:movie/feature/search/cubit/search_cubit.dart';
 import 'package:movie/feature/search/data/models/search_result_model.dart';
 import 'package:movie/feature/search/view/widgets/search_empty.dart';
 import 'package:movie/feature/search/view/widgets/search_input.dart';
 import 'package:movie/feature/search/view/widgets/search_item_widget.dart';
+import 'package:movie/feature/search/view/widgets/search_loading.dart';
 import 'package:toastification/toastification.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -70,11 +71,18 @@ class _SearchScreenState extends State<SearchScreen> {
                   if (data.isEmpty || query == "") {
                     return const EmptySearch();
                   }
+
                   return Expanded(
                     child: ListView.builder(
                       itemCount: data.length,
                       itemBuilder: (context, index) {
                         return SearchWidgetItem(
+                          totalItemonTap: () {
+                            Navigator.of(context).pushNamed(
+                              DetailsScreen.routeName,
+                              arguments: state.data?[index].id,
+                            );
+                          },
                           imagePath: state.data?[index].posterPath,
                           movieDescrption: state.data?[index].title,
                           movieRate: state.data?[index].voteAverage,
@@ -94,9 +102,11 @@ class _SearchScreenState extends State<SearchScreen> {
                     type: ToastificationType.error,
                   );
                   return Text(state.message ?? "");
-                } else {
-                  LoadingWidgetSkelton();
                 }
+                if (state is SearchCubitLoading) {
+                  return SearchLoadingIndecator();
+                }
+
                 return const EmptySearch();
               },
             ),
