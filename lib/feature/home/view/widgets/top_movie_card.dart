@@ -1,12 +1,19 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:movie/core/constants/api_constants.dart';
 import 'package:movie/core/constants/app_colors.dart';
 import 'package:movie/core/constants/app_strings.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class TopMovieCard extends StatelessWidget {
-  const TopMovieCard({super.key, required this.index, required this.imageUrl, this.onTap});
+  const TopMovieCard({
+    super.key,
+    required this.index,
+    this.imageUrl,
+    this.onTap,
+  });
   final int index;
-  final String imageUrl;
+  final String? imageUrl;
   final void Function()? onTap;
 
   @override
@@ -23,21 +30,25 @@ class TopMovieCard extends StatelessWidget {
               borderRadius: BorderRadius.circular(16),
               child: AspectRatio(
                 aspectRatio: 144 / 210,
-                child: Image.network(
-                  ApiConstants.imagePath + imageUrl,
+                child: CachedNetworkImage(
+                  imageUrl: "${ApiConstants.imagePath}$imageUrl",
                   fit: BoxFit.cover,
+                  placeholder: (_, __) => Center(
+                    child: Skeletonizer(
+                      enabled: true,
+                      child: Container(color: AppColors.gray),
+                    ),
+                  ),
+                  errorWidget: (_, __, ___) => const ColoredBox(
+                    color: AppColors.gray,
+                    child: Center(
+                      child: Icon(
+                        Icons.broken_image_outlined,
+                        color: AppColors.white,
+                      ),
+                    ),
+                  ),
                 ),
-                // : Container(
-                //     color: AppColors.gray,
-                //     alignment: Alignment.center,
-                //     child: Text(
-                //       movie.title,
-                //       textAlign: TextAlign.center,
-                //       style: Theme.of(
-                //         context,
-                //       ).textTheme.bodySmall?.copyWith(color: AppColors.white),
-                //     ),
-                //   ),
               ),
             ),
             Positioned(

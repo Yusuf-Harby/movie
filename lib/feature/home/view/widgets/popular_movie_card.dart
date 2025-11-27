@@ -29,8 +29,15 @@ class ItemMovieWidget extends StatelessWidget {
                   child: Container(color: AppColors.gray),
                 ),
               ),
-              errorWidget: (context, url, error) =>
-                  Icon(Icons.error, color: Colors.red),
+              errorWidget: (_, __, ___) => ColoredBox(
+                color: AppColors.gray,
+                child: Center(
+                  child: Icon(
+                    Icons.broken_image_outlined,
+                    color: AppColors.white,
+                  ),
+                ),
+              ),
             ),
           ),
         ),

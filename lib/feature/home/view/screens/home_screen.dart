@@ -63,7 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       itemBuilder: (context, index) {
                         return TopMovieCard(
                           index: index,
-                          imageUrl: state.topMovies[index].posterPath ?? "",
+                          imageUrl: state.topMovies[index].posterPath,
                           onTap: () {
                             int id = state.topMovies[index].id ?? 0;
                             Navigator.pushNamed(
@@ -106,7 +106,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       shrinkWrap: true,
                       itemBuilder: (context, index) {
                         return ItemMovieWidget(
-                          posterPath: state.resultList?[index].posterPath ?? "",
+                          posterPath: state.resultList?[index].posterPath,
                           onTap: () {
                             int id = state.resultList?[index].id ?? 0;
                             Navigator.pushNamed(
@@ -151,7 +151,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       shrinkWrap: true,
                       itemBuilder: (context, index) {
                         return ItemMovieWidget(
-                          posterPath: state.resultList?[index].posterPath ?? "",
+                          posterPath: state.resultList?[index].posterPath,
                           onTap: () {
                             int id = state.resultList?[index].id ?? 0;
                             Navigator.pushNamed(
