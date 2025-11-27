@@ -81,7 +81,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       title: "Error",
                       description: state.error,
                       type: ToastificationType.error,
-                      message: null,
                     );
                     return Center(child: Text(state.error));
                   }
@@ -126,7 +125,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     title: "Error",
                     description: state.message,
                     type: ToastificationType.error,
-                    message: null,
                   );
                   return Text(state.message);
                 } else {
@@ -171,7 +169,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     title: "Error",
                     description: state.message,
                     type: ToastificationType.error,
-                    message: null,
                   );
                   return Text(state.message);
                 } else {
