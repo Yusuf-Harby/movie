@@ -2,8 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie/core/dialogs/app_toasts.dart';
 import 'package:movie/core/dialogs/loading_skeletonizer.dart';
+import 'package:movie/core/network/api_result.dart';
 import 'package:movie/feature/home/cubit/realse_movie_cubit/release_movie_cubit.dart';
 import 'package:movie/feature/home/cubit/recommended_movie_cubit/recommended_movie_cubit.dart';
+import 'package:movie/feature/home/cubit/top_cubit/top_cubit.dart';
+import 'package:movie/feature/home/cubit/top_cubit/top_state.dart';
+import 'package:movie/feature/home/data/api/home_api_servcies.dart';
+import 'package:movie/feature/home/data/model/top_movie_model.dart';
 import 'package:movie/feature/home/view/screens/details_screen.dart';
 import 'package:movie/feature/home/view/widgets/popular_movie_card.dart';
 import 'package:movie/feature/home/view/widgets/top_movie_card.dart';
@@ -19,6 +24,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   late final ReleaseMovieCubit releaseCubit;
   late final RecommendedMovieCubit recommndedCubit;
+  late final TopCubit topCubit;
+
   @override
   void initState() {
     super.initState();
@@ -26,6 +33,8 @@ class _HomeScreenState extends State<HomeScreen> {
     releaseCubit.getReleasesMovies();
     recommndedCubit = RecommendedMovieCubit();
     recommndedCubit.getRecommendedMovies();
+    topCubit = TopCubit();
+    topCubit.getTopMovies();
   }
 
   @override
@@ -45,13 +54,41 @@ class _HomeScreenState extends State<HomeScreen> {
             SizedBox(height: 24),
             SizedBox(
               height: MediaQuery.sizeOf(context).height / 3.2,
-              child: ListView.separated(
-                scrollDirection: Axis.horizontal,
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                itemCount: 10,
-                separatorBuilder: (_, __) => const SizedBox(width: 20),
-                itemBuilder: (context, index) {
-                  return TopMovieCard(index: index);
+              child: BlocBuilder(
+                bloc: topCubit,
+                builder: (BuildContext context, state) {
+                  if (state is SuccessState) {
+                    return ListView.separated(
+                      scrollDirection: Axis.horizontal,
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      itemCount: state.topMovies.length,
+                      separatorBuilder: (_, __) => const SizedBox(width: 20),
+                      itemBuilder: (context, index) {
+                        return TopMovieCard(
+                          index: index,
+                          imageUrl: state.topMovies[index].posterPath ?? "",
+                          onTap: () {
+                            int id = state.topMovies[index].id ?? 0;
+                            Navigator.pushNamed(
+                              context,
+                              DetailsScreen.routeName,
+                              arguments: id,
+                            );
+                          },
+                        );
+                      },
+                    );
+                  } else if (state is ErrorState) {
+                    AppToast.showToast(
+                      context: context,
+                      title: "Error",
+                      description: state.error,
+                      type: ToastificationType.error,
+                      message: null,
+                    );
+                    return Center(child: Text(state.error));
+                  }
+                  return LoadingWidgetSkelton();
                 },
               ),
             ),
@@ -66,7 +103,7 @@ class _HomeScreenState extends State<HomeScreen> {
               builder: (context, state) {
                 if (state is ReleaseMovieSuccess) {
                   return SizedBox(
-                    height: MediaQuery.of(context).size.height / 6,
+                    height: MediaQuery.of(context).size.height / 5.6,
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
                       shrinkWrap: true,
@@ -92,6 +129,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     title: "Error",
                     description: state.message,
                     type: ToastificationType.error,
+                    message: null,
                   );
                   return Text(state.message);
                 } else {
@@ -110,7 +148,7 @@ class _HomeScreenState extends State<HomeScreen> {
               builder: (context, state) {
                 if (state is RecommendedSuccess) {
                   return SizedBox(
-                    height: MediaQuery.of(context).size.height / 6,
+                    height: MediaQuery.of(context).size.height / 5.6,
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
                       shrinkWrap: true,
@@ -136,6 +174,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     title: "Error",
                     description: state.message,
                     type: ToastificationType.error,
+                    message: null,
                   );
                   return Text(state.message);
                 } else {
@@ -149,50 +188,3 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
-/*
-  import 'package:flutter/material.dart';
-import 'package:movie/feature/home/view/widgets/popular_movie_card.dart';
-
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
-  @override
-  Widget build(BuildContext context) {
-    return _HomeView();
-  }
-}
-
-class _HomeView extends StatelessWidget {
-  const _HomeView();
-  @override
-  Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
-    return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.only(left: 16, top: 24),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text('What do you want to watch?', style: textTheme.titleLarge),
-              const SizedBox(height: 24),
-              SizedBox(
-                height: MediaQuery.sizeOf(context).height / 3.2,
-                child: ListView.separated(
-                  scrollDirection: Axis.horizontal,
-                  padding: const EdgeInsets.only(left: 10),
-                  itemCount: 10,
-                  separatorBuilder: (_, __) => const SizedBox(width: 20),
-                  itemBuilder: (context, index) {
-                    return PopularMovieCard(index: index);
-                  },
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-*/

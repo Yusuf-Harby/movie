@@ -7,7 +7,7 @@ abstract class AppToast {
     required BuildContext context,
     required String title,
     required String description,
-    required ToastificationType type,
+    required ToastificationType type, required message,
   }) {
     toastification.show(
       context: context,

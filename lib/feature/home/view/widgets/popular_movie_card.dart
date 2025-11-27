@@ -18,9 +18,8 @@ class ItemMovieWidget extends StatelessWidget {
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(16)),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(16),
-
           child: AspectRatio(
-            aspectRatio: 10 / 15,
+            aspectRatio: 100 / 145,
             child: CachedNetworkImage(
               imageUrl: "${ApiConstants.imagePath}$posterPath",
               fit: BoxFit.cover,
