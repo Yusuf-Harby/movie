@@ -11,7 +11,10 @@ class TopCubit extends Cubit<TopState> {
     final result = await HomeApiServcies.getTopMovies();
     switch (result) {
       case ApiSuccess<TopMovieModel>():
-        emit(SuccessState(result.data?.results ?? []));
+        List<Results>? notEmptyList = result.data?.results!.where((movie) {
+          return movie.posterPath != null && movie.posterPath!.isNotEmpty;
+        }).toList();
+        emit(SuccessState(notEmptyList!));
       case ApiError<TopMovieModel>():
         emit(ErrorState(result.error));
     }
