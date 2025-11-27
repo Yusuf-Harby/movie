@@ -39,7 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final textTheme = Theme.of(context).textTheme;
     return Scaffold(
       appBar: AppBar(
-        title: Text('What do you want to watch?', style: textTheme.titleLarge),
+        title: Text('What do you want to watch?', style: textTheme.titleSmall),
         centerTitle: false,
       ),
 
