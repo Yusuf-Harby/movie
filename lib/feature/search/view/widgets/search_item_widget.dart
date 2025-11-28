@@ -119,6 +119,7 @@ class IcontAndTextRowItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Row(
+        spacing: 5,
         children: [
           SvgPicture.asset(iconpath),
           Expanded(
