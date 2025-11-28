@@ -81,9 +81,6 @@ class LoadingWidgetSkeleton extends StatelessWidget {
     }
   }
 
-  // ----------------------------------------------------------
-  // BASIC BOX
-  // ----------------------------------------------------------
   Widget _boxSkeleton() {
     return Align(
       alignment: alignment,
@@ -100,9 +97,6 @@ class LoadingWidgetSkeleton extends StatelessWidget {
     );
   }
 
-  // ----------------------------------------------------------
-  // CIRCLE
-  // ----------------------------------------------------------
   Widget _circleSkeleton() {
     return Align(
       alignment: alignment,
@@ -119,9 +113,6 @@ class LoadingWidgetSkeleton extends StatelessWidget {
     );
   }
 
-  // ----------------------------------------------------------
-  // PROFILE
-  // ----------------------------------------------------------
   Widget _profileSkeleton() {
     return Align(
       alignment: alignment,
@@ -150,9 +141,6 @@ class LoadingWidgetSkeleton extends StatelessWidget {
     );
   }
 
-  // ----------------------------------------------------------
-  // CARD
-  // ----------------------------------------------------------
   Widget _cardSkeleton() {
     return Align(
       alignment: alignment,
@@ -181,9 +169,6 @@ class LoadingWidgetSkeleton extends StatelessWidget {
     );
   }
 
-  // ----------------------------------------------------------
-  // TEXT
-  // ----------------------------------------------------------
   Widget _textSkeleton() {
     return Align(
       alignment: alignment,
@@ -204,9 +189,6 @@ class LoadingWidgetSkeleton extends StatelessWidget {
     );
   }
 
-  // ----------------------------------------------------------
-  // DESCRIPTION
-  // ----------------------------------------------------------
   Widget _descriptionSkeleton() {
     return Align(
       alignment: alignment,
@@ -230,9 +212,6 @@ class LoadingWidgetSkeleton extends StatelessWidget {
     );
   }
 
-  // ----------------------------------------------------------
-  // COMMON TEXT-LINE BLOCK
-  // ----------------------------------------------------------
   Widget _textLine({required double width}) {
     return Container(
       width: width,
@@ -244,9 +223,6 @@ class LoadingWidgetSkeleton extends StatelessWidget {
     );
   }
 
-  // ----------------------------------------------------------
-  // ALIGNMENT → CROSSAXIS
-  // ----------------------------------------------------------
   CrossAxisAlignment _alignmentToCrossAxis() {
     if (alignment == Alignment.centerRight) return CrossAxisAlignment.end;
     if (alignment == Alignment.centerLeft) return CrossAxisAlignment.start;

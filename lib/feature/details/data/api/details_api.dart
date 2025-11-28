@@ -30,7 +30,6 @@ class DetailsApi {
       int statusCode = response.statusCode;
       if (statusCode >= 200 && statusCode < 300) {
         final result = jsonDecode(response.body);
-        // result["base_url"] = "${urlData.scheme}://${urlData.host}${urlData.path}";
         return ApiSuccess(jsonConverter(result));
       }
       return ApiError("$_unhandledResponseCodeErrorMsg $statusCode");

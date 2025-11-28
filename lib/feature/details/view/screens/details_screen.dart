@@ -49,7 +49,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                 height: 24,
                 fit: BoxFit.cover,
               ),
-              onPressed: _onSavedPressed, //@ TODO: Read/Write to DB
+              onPressed: _onSavedPressed
             ),
           ],
         ),
