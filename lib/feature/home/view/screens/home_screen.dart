@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie/core/dialogs/app_toasts.dart';
 import 'package:movie/core/dialogs/loading_skeletonizer.dart';
+import 'package:movie/feature/details/view/screens/details_screen.dart';
 import 'package:movie/feature/home/cubit/realse_movie_cubit/release_movie_cubit.dart';
 import 'package:movie/feature/home/cubit/recommended_movie_cubit/recommended_movie_cubit.dart';
 import 'package:movie/feature/home/cubit/top_cubit/top_cubit.dart';
 import 'package:movie/feature/home/cubit/top_cubit/top_state.dart';
-import 'package:movie/feature/home/view/screens/details_screen.dart';
 import 'package:movie/feature/home/view/widgets/popular_movie_card.dart';
 import 'package:movie/feature/home/view/widgets/top_movie_card.dart';
 import 'package:toastification/toastification.dart';
@@ -84,7 +84,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     );
                     return Center(child: Text(state.error));
                   }
-                  return LoadingWidgetSkelton();
+                  return LoadingWidgetSkeleton();
                 },
               ),
             ),
@@ -128,7 +128,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   );
                   return Text(state.message);
                 } else {
-                  return LoadingWidgetSkelton();
+                  return LoadingWidgetSkeleton();
                 }
               },
             ),
@@ -172,7 +172,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   );
                   return Text(state.message);
                 } else {
-                  return LoadingWidgetSkelton();
+                  return LoadingWidgetSkeleton();
                 }
               },
             ),
