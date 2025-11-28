@@ -7,4 +7,5 @@ abstract class AppStrings {
   static const String fontPoppins = 'Poppins';
   static const String fontRoboto = 'Roboto';
   static const String fontMontserrat = 'Montserrat';
+  static const String fontPopular = 'Popular';
 }

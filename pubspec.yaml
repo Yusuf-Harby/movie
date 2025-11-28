@@ -92,6 +92,9 @@ flutter:
     - family: Roboto
       fonts:
         - asset: assets/fonts/Roboto.ttf
+    - family: Popular
+      fonts:
+        - asset: assets/fonts/popular.ttf
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
