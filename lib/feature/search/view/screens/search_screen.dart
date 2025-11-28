@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:movie/core/constants/app_strings.dart';
 import 'package:movie/core/dialogs/app_toasts.dart';
-import 'package:movie/feature/home/view/screens/details_screen.dart';
+import 'package:movie/feature/details/view/screens/details_screen.dart';
 import 'package:movie/feature/search/cubit/search_cubit.dart';
 import 'package:movie/feature/search/data/models/search_result_model.dart';
 import 'package:movie/feature/search/view/widgets/search_empty.dart';
