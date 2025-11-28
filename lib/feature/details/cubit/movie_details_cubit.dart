@@ -35,22 +35,4 @@ class MovieDetailsCubit extends Cubit<MovieDetailsState> {
         );
     }
   }
-
-  // Future<void> loadAllMovieData(int movieId) async {
-  //   emit(MovieDetailsLoadingState());
-
-  //   final details = await DetailsApi.getMovieDetails(movieId);
-  //   final related = await DetailsApi.getRelatedMoviesToMovie(movieId);
-
-  //   if(details is ApiSuccess<MovieDetailsModel> && related is ApiSuccess<RelatedMovieDetailsModel>){
-  //     details.data!.relatedMovieDetailsModel = related.data;
-  //     emit(MovieDetailsSuccessState<MovieDetailsModel>(details.data));
-  //   }
-  //   if(details is ApiError<MovieDetailsModel>){
-  //     emit(MovieDetailsErrorState<MovieDetailsModel>(details.error));
-  //   }
-  //   if(related is ApiError<RelatedMovieDetailsModel>){
-  //     emit(MovieDetailsErrorState<MovieDetailsModel>(related.error));
-  //   }
-  // }
 }
