@@ -13,11 +13,11 @@ class LoadingWidgetSkelton extends StatelessWidget {
       child: Skeletonizer(
         enabled: true,
         child: ListView.builder(
-          itemCount: 7,
+          itemCount: 5,
           padding: EdgeInsets.all(30),
           itemBuilder: (context, index) {
             return Container(
-              width: 100,
+              width: 40,
               height: 100,
               decoration: BoxDecoration(
                 color: AppColors.gray,
