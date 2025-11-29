@@ -18,9 +18,8 @@ class ItemMovieWidget extends StatelessWidget {
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(16)),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(16),
-
           child: AspectRatio(
-            aspectRatio: 10 / 15,
+            aspectRatio: 100 / 145,
             child: CachedNetworkImage(
               imageUrl: "${ApiConstants.imagePath}$posterPath",
               fit: BoxFit.cover,
@@ -30,8 +29,15 @@ class ItemMovieWidget extends StatelessWidget {
                   child: Container(color: AppColors.gray),
                 ),
               ),
-              errorWidget: (context, url, error) =>
-                  Icon(Icons.error, color: Colors.red),
+              errorWidget: (_, __, ___) => ColoredBox(
+                color: AppColors.gray,
+                child: Center(
+                  child: Icon(
+                    Icons.broken_image_outlined,
+                    color: AppColors.white,
+                  ),
+                ),
+              ),
             ),
           ),
         ),

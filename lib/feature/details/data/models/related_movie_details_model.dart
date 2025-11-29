@@ -1,12 +1,13 @@
-class SearchModel {
+class RelatedMovieDetailsModel {
   int? page;
   List<Results>? results;
   int? totalPages;
   int? totalResults;
+  String? baseUrl;
 
-  SearchModel({page, results, totalPages, totalResults});
+  RelatedMovieDetailsModel({page, results, totalPages, totalResults,baseUrl});
 
-  SearchModel.fromJson(Map<String, dynamic> json) {
+  RelatedMovieDetailsModel.fromJson(Map<String, dynamic> json) {
     page = json['page'];
     if (json['results'] != null) {
       results = <Results>[];
@@ -16,6 +17,7 @@ class SearchModel {
     }
     totalPages = json['total_pages'];
     totalResults = json['total_results'];
+    baseUrl = json['base_url'];
   }
 }
 
@@ -35,22 +37,21 @@ class Results {
   double? voteAverage;
   int? voteCount;
 
-  Results({
-    adult,
-    backdropPath,
-    genreIds,
-    id,
-    originalLanguage,
-    originalTitle,
-    overview,
-    popularity,
-    posterPath,
-    releaseDate,
-    title,
-    video,
-    voteAverage,
-    voteCount,
-  });
+  Results(
+      {adult,
+      backdropPath,
+      genreIds,
+      id,
+      originalLanguage,
+      originalTitle,
+      overview,
+      popularity,
+      posterPath,
+      releaseDate,
+      title,
+      video,
+      voteAverage,
+      voteCount});
 
   Results.fromJson(Map<String, dynamic> json) {
     adult = json['adult'];
@@ -68,4 +69,5 @@ class Results {
     voteAverage = json['vote_average'];
     voteCount = json['vote_count'];
   }
+
 }

@@ -1,12 +1,12 @@
-class SearchModel {
+class TopMovieModel {
   int? page;
   List<Results>? results;
   int? totalPages;
   int? totalResults;
 
-  SearchModel({page, results, totalPages, totalResults});
+  TopMovieModel({this.page, this.results, this.totalPages, this.totalResults});
 
-  SearchModel.fromJson(Map<String, dynamic> json) {
+  TopMovieModel.fromJson(Map<String, dynamic> json) {
     page = json['page'];
     if (json['results'] != null) {
       results = <Results>[];
@@ -36,20 +36,20 @@ class Results {
   int? voteCount;
 
   Results({
-    adult,
-    backdropPath,
-    genreIds,
-    id,
-    originalLanguage,
-    originalTitle,
-    overview,
-    popularity,
-    posterPath,
-    releaseDate,
-    title,
-    video,
-    voteAverage,
-    voteCount,
+    this.adult,
+    this.backdropPath,
+    this.genreIds,
+    this.id,
+    this.originalLanguage,
+    this.originalTitle,
+    this.overview,
+    this.popularity,
+    this.posterPath,
+    this.releaseDate,
+    this.title,
+    this.video,
+    this.voteAverage,
+    this.voteCount,
   });
 
   Results.fromJson(Map<String, dynamic> json) {
