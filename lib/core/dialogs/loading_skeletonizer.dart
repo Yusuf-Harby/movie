@@ -55,7 +55,8 @@ class LoadingWidgetSkeleton extends StatelessWidget {
               padding: padding,
               scrollDirection: scrollDirection,
               itemCount: itemCount,
-              separatorBuilder: (_, __) => const SizedBox(width: 16, height: 16),
+              separatorBuilder: (_, __) =>
+                  const SizedBox(width: 16, height: 16),
               itemBuilder: (_, __) => _buildDetailsLoadingSkeletonType(),
             ),
           ),
@@ -179,9 +180,7 @@ class LoadingWidgetSkeleton extends StatelessWidget {
             itemCount,
             (_) => Padding(
               padding: const EdgeInsets.only(bottom: 6),
-              child: _textLine(
-                width: itemWidth + Random().nextInt(10),
-              ),
+              child: _textLine(width: itemWidth + Random().nextInt(10)),
             ),
           ),
         ),

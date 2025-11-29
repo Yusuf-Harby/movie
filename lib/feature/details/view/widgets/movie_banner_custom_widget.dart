@@ -108,7 +108,11 @@ class _MovieBannerCustomWidgetState extends State<MovieBannerCustomWidget> {
     ),
   );
   Widget _errorTemplate(BuildContext context, String error) {
-    return Container(width: bannerWidth, height: bannerHeight, color: Colors.grey);
+    return Container(
+      width: bannerWidth,
+      height: bannerHeight,
+      color: Colors.grey,
+    );
   }
 
   Widget _textTemplate([double? rateValue]) => Text(

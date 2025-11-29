@@ -81,8 +81,8 @@ abstract class AppTheme {
       titleMedium: TextStyle(
         color: AppColors.white,
         fontSize: 16,
-        fontWeight: FontWeight.w500,
-        fontFamily: AppStrings.fontPoppins,
+        fontWeight: FontWeight.w600,
+        fontFamily: AppStrings.fontMontserrat,
         height: 1.4,
       ),
       titleSmall: TextStyle(
@@ -110,7 +110,7 @@ abstract class AppTheme {
         color: AppColors.gray,
         fontSize: 12,
         fontWeight: FontWeight.normal,
-        fontFamily: AppStrings.fontRoboto,
+        fontFamily: AppStrings.fontMontserrat,
         height: 1.4,
       ),
       labelLarge: TextStyle(

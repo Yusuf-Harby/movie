@@ -31,11 +31,14 @@ class _MovieDetailsStatusCustomWidgetState
       targetWidget = _loadingTemplate();
       targetDescWidget = _loadingTemplateDesc();
     }
-    if(widget.errorTemplate) {
+    if (widget.errorTemplate) {
       targetWidget = _errorTemplate();
       targetDescWidget = _errorTemplateDesc();
     }
-    return _mainBody(targetWidget ?? _detailsWidget(), targetDescWidget ?? _descWidget());
+    return _mainBody(
+      targetWidget ?? _detailsWidget(),
+      targetDescWidget ?? _descWidget(),
+    );
   }
 
   Widget _mainBody(Widget detail, Widget overview) => Column(
@@ -47,13 +50,9 @@ class _MovieDetailsStatusCustomWidgetState
           child: detail,
         ),
       ),
-      SizedBox(height: 12,),
+      SizedBox(height: 12),
       Padding(
-        padding: const EdgeInsets.only(
-          left: 24,
-          bottom: 16,
-          right: 34,
-        ),
+        padding: const EdgeInsets.only(left: 24, bottom: 16, right: 34),
         child: overview,
       ),
     ],
