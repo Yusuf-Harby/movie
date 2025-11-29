@@ -5,7 +5,7 @@ class RelatedMovieDetailsModel {
   int? totalResults;
   String? baseUrl;
 
-  RelatedMovieDetailsModel({page, results, totalPages, totalResults,baseUrl});
+  RelatedMovieDetailsModel({page, results, totalPages, totalResults, baseUrl});
 
   RelatedMovieDetailsModel.fromJson(Map<String, dynamic> json) {
     page = json['page'];
@@ -37,21 +37,22 @@ class Results {
   double? voteAverage;
   int? voteCount;
 
-  Results(
-      {adult,
-      backdropPath,
-      genreIds,
-      id,
-      originalLanguage,
-      originalTitle,
-      overview,
-      popularity,
-      posterPath,
-      releaseDate,
-      title,
-      video,
-      voteAverage,
-      voteCount});
+  Results({
+    adult,
+    backdropPath,
+    genreIds,
+    id,
+    originalLanguage,
+    originalTitle,
+    overview,
+    popularity,
+    posterPath,
+    releaseDate,
+    title,
+    video,
+    voteAverage,
+    voteCount,
+  });
 
   Results.fromJson(Map<String, dynamic> json) {
     adult = json['adult'];
@@ -69,5 +70,4 @@ class Results {
     voteAverage = json['vote_average'];
     voteCount = json['vote_count'];
   }
-
 }

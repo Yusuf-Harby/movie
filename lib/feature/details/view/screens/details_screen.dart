@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie/core/constants/app_assets.dart';
 import 'package:movie/core/constants/app_colors.dart';
 import 'package:movie/core/constants/app_strings.dart';
@@ -13,6 +13,9 @@ import 'package:movie/feature/details/view/widgets/movie_banner_custom_widget.da
 import 'package:movie/feature/details/view/widgets/movie_details_status_custom_widget.dart';
 import 'package:movie/feature/details/view/widgets/movie_poster_title_custom_widget.dart';
 import 'package:movie/feature/details/view/widgets/movie_related_list_custom_widget.dart';
+import 'package:movie/feature/watch_list/cubit/watch_list_cubit.dart';
+import 'package:movie/feature/watch_list/cubit/watch_list_state.dart';
+import 'package:movie/feature/watch_list/data/models/watch_list_item_model.dart';
 import 'package:toastification/toastification.dart';
 
 class DetailsScreen extends StatefulWidget {
@@ -42,14 +45,19 @@ class _DetailsScreenState extends State<DetailsScreen> {
               onPressed: _onBackPressed,
             ),
             const Text(AppStrings.details),
-            IconButton(
-              icon: SvgPicture.asset(
-                isSaved ? AppIcons.saveFilled : AppIcons.save,
-                width: 24,
-                height: 24,
-                fit: BoxFit.cover,
-              ),
-              onPressed: _onSavedPressed
+            BlocBuilder<WatchListCubit, WatchListState>(
+              builder: (context, state) {
+                final saved = _isMovieMarked(state);
+                return IconButton(
+                  icon: SvgPicture.asset(
+                    saved ? AppIcons.saveFilled : AppIcons.save,
+                    width: 24,
+                    height: 24,
+                    fit: BoxFit.cover,
+                  ),
+                  onPressed: state is WatchListLoading ? null : _onSavedPressed,
+                );
+              },
             ),
           ],
         ),
@@ -66,10 +74,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
                 backdropPath: state.movieDetailsModel!.backdropPath,
               ),
               loadingState: MovieBannerCustomWidget(loadingTemplate: true),
-              errorState: (error) => MovieBannerCustomWidget(
-                errorTemplate: true,
-                errorMsg: error,
-              ),  
+              errorState: (error) =>
+                  MovieBannerCustomWidget(errorTemplate: true, errorMsg: error),
             ),
             _toHandleRepeatedBloc<MovieDetailsModel>(
               movieDetailsCubit,
@@ -123,7 +129,31 @@ class _DetailsScreenState extends State<DetailsScreen> {
   }
 
   void _onSavedPressed() {
-    isSaved = !isSaved;
+    if (movieId == null) return;
+    final movieState = movieDetailsCubit.state;
+    if (movieState is! MovieDetailsSuccessState<MovieDetailsModel> ||
+        movieState.movieDetailsModel == null) {
+      AppToast.showToast(
+        context: context,
+        title: AppStrings.watchList,
+        description: AppStrings.saveMovieAfterLoad,
+        type: ToastificationType.info,
+      );
+      return;
+    }
+    final watchListCubit = context.read<WatchListCubit>();
+    final alreadySaved = watchListCubit.isMovieSaved(movieId!);
+    watchListCubit.toggleMovie(
+      WatchListItemModel.fromMovieDetails(movieState.movieDetailsModel!),
+    );
+    AppToast.showToast(
+      context: context,
+      title: AppStrings.watchList,
+      description: alreadySaved
+          ? AppStrings.removedFromWatchList
+          : AppStrings.addedToWatchList,
+      type: ToastificationType.success,
+    );
   }
 
   Widget _onErrorState(
@@ -191,7 +221,18 @@ class _DetailsScreenState extends State<DetailsScreen> {
     ).pushNamed(DetailsScreen.routeName, arguments: movieId);
   }
 
-  bool isSaved = false;
+  bool _isMovieMarked(WatchListState state) {
+    if (movieId == null) {
+      return false;
+    }
+    if (state is WatchListLoaded) {
+      return state.contains(movieId!);
+    }
+    if (state is WatchListLoading) {
+      return context.read<WatchListCubit>().isMovieSaved(movieId!);
+    }
+    return false;
+  }
 
   late MovieDetailsCubit movieDetailsCubit;
   late MovieDetailsCubit relatedMovieDetailsCubit;
@@ -203,10 +244,13 @@ class _DetailsScreenState extends State<DetailsScreen> {
     movieDetailsCubit = MovieDetailsCubit();
     relatedMovieDetailsCubit = MovieDetailsCubit();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      movieId ??= ModalRoute.of(context)!.settings.arguments as int;
-      if (movieId != null) {
-        movieDetailsCubit.getMovieDetails(movieId!);
-        relatedMovieDetailsCubit.getRelatedMoviesDetails(movieId!);
+      final args = ModalRoute.of(context)?.settings.arguments;
+      if (args is int && args != movieId) {
+        setState(() {
+          movieId = args;
+        });
+        movieDetailsCubit.getMovieDetails(args);
+        relatedMovieDetailsCubit.getRelatedMoviesDetails(args);
       }
     });
   }

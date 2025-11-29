@@ -61,7 +61,9 @@ class MovieDetailsModel {
   MovieDetailsModel.fromJson(Map<String, dynamic> json) {
     adult = json['adult'];
     backdropPath = json['backdrop_path'];
-    belongsToCollection = BelongCollection.fromJson(json['belongs_to_collection'] ?? {});
+    belongsToCollection = BelongCollection.fromJson(
+      json['belongs_to_collection'] ?? {},
+    );
     budget = json['budget'];
     if (json['genres'] != null) {
       genres = <Genres>[];
@@ -81,13 +83,13 @@ class MovieDetailsModel {
     if (json['production_companies'] != null) {
       productionCompanies = <ProductionCompanies>[];
       json['production_companies'].forEach((v) {
-        productionCompanies!.add( ProductionCompanies.fromJson(v));
+        productionCompanies!.add(ProductionCompanies.fromJson(v));
       });
     }
     if (json['production_countries'] != null) {
       productionCountries = <ProductionCountries>[];
       json['production_countries'].forEach((v) {
-        productionCountries!.add( ProductionCountries.fromJson(v));
+        productionCountries!.add(ProductionCountries.fromJson(v));
       });
     }
     releaseDate = json['release_date'];
@@ -96,7 +98,7 @@ class MovieDetailsModel {
     if (json['spoken_languages'] != null) {
       spokenLanguages = <SpokenLanguages>[];
       json['spoken_languages'].forEach((v) {
-        spokenLanguages!.add( SpokenLanguages.fromJson(v));
+        spokenLanguages!.add(SpokenLanguages.fromJson(v));
       });
     }
     status = json['status'];

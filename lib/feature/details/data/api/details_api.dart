@@ -6,10 +6,9 @@ import 'package:movie/feature/details/data/models/movie_details_model.dart';
 import "package:http/http.dart" as http;
 import 'package:movie/feature/details/data/models/related_movie_details_model.dart';
 
-
-
 class DetailsApi {
-  static const String _unhandledResponseCodeErrorMsg = "Unhandled Response Code:";
+  static const String _unhandledResponseCodeErrorMsg =
+      "Unhandled Response Code:";
   static const String _movieDetailsEndpoint = '/3/movie/%i';
   static const String _similarMoviesEndpoint = '/3/movie/%i/similar';
   static const String _apiParamKeyName = 'api_key';
@@ -21,11 +20,9 @@ class DetailsApi {
   ) async {
     try {
       endPoint = endPoint.replaceAll("%i", movieId.toString());
-      Uri urlData = Uri.https(
-        ApiConstants.baseUrl,
-        endPoint,
-        {_apiParamKeyName: ApiConstants.apiKey},
-      );
+      Uri urlData = Uri.https(ApiConstants.baseUrl, endPoint, {
+        _apiParamKeyName: ApiConstants.apiKey,
+      });
       final response = await http.get(urlData);
       int statusCode = response.statusCode;
       if (statusCode >= 200 && statusCode < 300) {
@@ -38,7 +35,9 @@ class DetailsApi {
     }
   }
 
-  static Future<ApiResult<MovieDetailsModel>> getMovieDetails(int movieId) async {
+  static Future<ApiResult<MovieDetailsModel>> getMovieDetails(
+    int movieId,
+  ) async {
     return await _handleReturnResult<MovieDetailsModel>(
       _movieDetailsEndpoint,
       movieId,
@@ -55,5 +54,4 @@ class DetailsApi {
       RelatedMovieDetailsModel.fromJson,
     );
   }
-
 }
